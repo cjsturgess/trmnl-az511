@@ -7,6 +7,8 @@ module.exports = async (req, res) => {
     const api_key = req.query.api_key,
         query = req.body.query;
 
+    console.log(req.body);
+
     /**
      * API Key Validation
      */

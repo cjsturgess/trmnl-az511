@@ -11,6 +11,8 @@ module.exports = async (req, res) => {
         lat_lng = req.query.lat_lng,
         msg_idx = req.query.msg_idx;
 
+    console.log(req.query);
+
     /**
      * Parameter Validation
      */
@@ -105,5 +107,6 @@ module.exports = async (req, res) => {
         "all_messages": selected_board.MessagesFormatted
     };
     
+    console.log(message_board);
     return res.json(message_board);
 };
