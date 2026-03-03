@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
         lat_lng = req.query.lat_lng,
         msg_idx = req.query.msg_idx;
 
-    console.log(req.query);
+    //console.log(req.query);
 
     /**
      * Parameter Validation
@@ -87,7 +87,7 @@ module.exports = async (req, res) => {
             "error": "No board found for that filter."
         });
 
-    selected_board.MessagesFormatted = selected_board.Messages.map(x => x.split("\r\n"));
+    selected_board.MessagesFormatted = selected_board.Messages.map(x => x.replaceAll("\r\n", "<br>").replaceAll(" ", "&nbsp;"));
 
     let selected_message = selected_board.MessagesFormatted[Math.floor(Math.random() * selected_board.MessagesFormatted.length)];
     if (msg_idx) {
@@ -107,7 +107,7 @@ module.exports = async (req, res) => {
         "all_messages": selected_board.MessagesFormatted
     };
     
-    console.log(message_board);
+    //console.log(message_board);
     return res.json({
         "board": message_board
     });
