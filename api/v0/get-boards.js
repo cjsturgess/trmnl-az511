@@ -4,10 +4,11 @@
  */
 
 module.exports = async (req, res) => {
-    const api_key = req.query.api_key,
-        query = req.body.query;
+    const query = req.body.query;
 
-    //console.log(req.body);
+    let api_key;
+    if (req.body.plugin_setting)
+        api_key = req.body.plugin_setting.settings_custom_fields_values_api_key;
 
     /**
      * API Key Validation

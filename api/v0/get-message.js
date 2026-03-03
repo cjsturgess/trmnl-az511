@@ -44,9 +44,9 @@ module.exports = async (req, res) => {
             });
     }
 
-    let message_boards;
+    let available_boards;
     try {
-        message_boards = await api_response.json();
+        available_boards = await api_response.json();
     } catch (e) {
         return res.json({
             "error": "Failed to parse the AZ511 API query response."
@@ -54,11 +54,9 @@ module.exports = async (req, res) => {
     }
 
 
-    const available_boards = message_boards.filter(x => (x.Messages.length > 0) && (x.Messages[0] != "NO_MESSAGE"));
     let selected_board;
-
     if (board_id) {
-        selected_board = available_boards.filter(x => x.Id === board_id)[0];
+        selected_board = available_boards.filter(x => x.Id === board_id.split("::")[0])[0];
     } else {
         loc_parts = lat_lng.split(",");
         if (loc_parts.length < 2)
@@ -69,7 +67,7 @@ module.exports = async (req, res) => {
         loc_lat = loc_parts[0];
         loc_lng = loc_parts[1];
 
-        const sorted_boards = available_boards.sort((a, b) => {
+        const sorted_boards = available_boards.filter(x => (x.Messages.length > 0) && x.Messages[0] !== "NO_MESSAGE").sort((a, b) => {
             const distA = calculateDistance(loc_lat, loc_lng, a.Latitude, a.Longitude);
             const distB = calculateDistance(loc_lat, loc_lng, b.Latitude, b.Longitude);
 
