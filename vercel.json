@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "headers": [
+        {
+            "source": "/api/v0/get-boards",
+            "headers": [
+                { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+        }
+    ]
+}
