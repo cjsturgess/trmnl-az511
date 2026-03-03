@@ -108,5 +108,7 @@ module.exports = async (req, res) => {
     };
     
     console.log(message_board);
-    return res.json(message_board);
+    return res.json({
+        "board": message_board
+    });
 };
