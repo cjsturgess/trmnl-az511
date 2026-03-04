@@ -4,10 +4,12 @@
  */
 
 module.exports = async (req, res) => {
-    const query = req.body.query;
+    let query;
+    if (req.body && req.body.query)
+        query = req.bpdy.query;
 
     let api_key;
-    if (req.body.plugin_setting)
+    if (req.body && req.body.plugin_setting)
         api_key = req.body.plugin_setting.settings_custom_fields_values_api_key;
 
     /**
